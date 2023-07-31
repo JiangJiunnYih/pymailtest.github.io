@@ -1,20 +1,29 @@
-import smtplib, ssl
-                    
-port = 465 
-smtp_server = "smtp.gmail.com"
+import smtplib
+import ssl
+
+def send_email(sender_email, sender_password, receiver_email, subject, body):
+    port = 465
+    smtp_server = "smtp.gmail.com"
+
+    message = f"Subject: {subject}\n\n{body}"
+
+    context = ssl.create_default_context()
+
+    try:
+        server = smtplib.SMTP_SSL(smtp_server, port, context=context)
+        server.login(sender_email, sender_password)
+        server.sendmail(sender_email, receiver_email, message)
+        print("Email sent successfully!")
+    except Exception as e:
+        print("An error occurred:", str(e))
+    finally:
+        server.quit()
+
+# Example usage:
 sender_email = "lab814reservatiosystem@gmail.com"
 receiver_email = "olivereddie1996.mg10@nycu.edu.tw"
 password = "elqskdpnokjjwzoi"
-message = """\
-            Subject: Hi there
+subject = "Test Email"
+body = "This is a test email sent using Python."
 
-            This message is sent from Python."""
-
-context = ssl.create_default_context()
-try:
-    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
-        server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, message)
-        print("Mail send Successed")
-except:
-        print("Mail send failed")
+send_email(sender_email, password, receiver_email, subject, body)
