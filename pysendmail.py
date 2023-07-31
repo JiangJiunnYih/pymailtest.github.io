@@ -22,8 +22,8 @@ def send_email(sender_email, sender_password, receiver_email, subject, body):
 # Example usage:
 sender_email = "lab814reservatiosystem@gmail.com"
 receiver_email = "olivereddie1996.mg10@nycu.edu.tw"
-password = "elqskdpnokjjwzoi"
+sender_password = "elqskdpnokjjwzoi"
 subject = "Test Email"
 body = "This is a test email sent using Python."
 
-send_email(sender_email, password, receiver_email, subject, body)
+send_email(sender_email, sender_password, receiver_email, subject, body)
